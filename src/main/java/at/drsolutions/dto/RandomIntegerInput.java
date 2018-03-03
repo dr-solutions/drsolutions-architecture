@@ -1,18 +1,19 @@
 package at.drsolutions.dto;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class RandomIntegerInput extends AbstractInput {
 	private static final long serialVersionUID = 1L;
 
 	private Integer maxValue;
-	
-	public RandomIntegerInput() {}
-	
-	public RandomIntegerInput(int maxValue) {
-		this.maxValue = new Integer(maxValue);
+
+	public RandomIntegerInput() {
 	}
-	
-	public RandomIntegerInput(Integer maxValue) {
-		this.maxValue = maxValue;
+
+	@JsonCreator
+	public RandomIntegerInput(@JsonProperty("maxValue") int maxValue) {
+		this.maxValue = new Integer(maxValue);
 	}
 
 	public Integer getMaxValue() {

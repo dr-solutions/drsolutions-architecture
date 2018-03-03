@@ -1,18 +1,19 @@
 package at.drsolutions.dto;
 
-public class RandomIntegerOutput extends AbstractOutput{
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public class RandomIntegerOutput extends AbstractOutput {
 	private static final long serialVersionUID = 1L;
 
 	private Integer generatedInteger;
-	
-	public RandomIntegerOutput() {}
-	
-	public RandomIntegerOutput(int generatedInt) {
-		this.generatedInteger = new Integer(generatedInt);
+
+	public RandomIntegerOutput() {
 	}
-	
-	public RandomIntegerOutput(Integer generatedInteger) {
-		this.generatedInteger = generatedInteger;
+
+	@JsonCreator
+	public RandomIntegerOutput(@JsonProperty("generatedInt") int generatedInt) {
+		this.generatedInteger = new Integer(generatedInt);
 	}
 
 	public Integer getGeneratedInteger() {

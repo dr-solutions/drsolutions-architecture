@@ -15,6 +15,7 @@
 		<junit.version>4.12</junit.version>
 		<jax-ws.version>2.2.6</jax-ws.version>
 		<slf4j-logger.version>1.7.25</slf4j-logger.version>
+		<jackson.version>1.9.13</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -28,6 +29,12 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j-logger.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<!-- Test-Scope -->
