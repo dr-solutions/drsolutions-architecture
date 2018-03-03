@@ -10,6 +10,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import at.drsolutions.dto.RandomIntegerInput;
+import at.drsolutions.dto.RandomIntegerOutput;
+import at.drsolutions.ws.interfaces.BackendService;
+
 public class BackendWebserviceIT {
 	
 	private BackendService backendService;
@@ -17,7 +21,7 @@ public class BackendWebserviceIT {
 	@Before
 	public void initWebserviceClient() throws MalformedURLException {
 		URL url = new URL("http://localhost:8080/drsolutions-architecture-1.0-SNAPSHOT/BackendServiceImpl?wsdl");
-        QName qname = new QName("http://ws.drsolutions.at/", "BackendServiceImplService");
+        QName qname = new QName("http://impl.ws.drsolutions.at/", "BackendServiceImplService");
         Service service = Service.create(url, qname);
         backendService = service.getPort(BackendService.class);
 	}
@@ -25,8 +29,11 @@ public class BackendWebserviceIT {
 	@Test
 	public void testBackendWebserviceCall() {
 		int max = 1001;
-		int intFromWS = backendService.generateRandomInteger(max);
-		System.out.println("Integer got from Backend-Webservice (max="+ max + ") --> " + intFromWS);
+		RandomIntegerOutput output = backendService.generateRandomInteger(new RandomIntegerInput(max));
+		Assert.assertNotNull(output);
+		Assert.assertNotNull(output.getGeneratedInteger());
+		int intFromWS = output.getGeneratedInteger().intValue();
 		Assert.assertTrue(intFromWS >= 0 && intFromWS <= max);
+		System.out.println("Integer got from Backend-Webservice (max="+ max + ") --> " + intFromWS);
 	}
 }
