@@ -6,4 +6,6 @@ public interface BackendService {
 
 	public Response generateRandomIntegerText(int max);
 
+	public Response getAllTermine();
+
 }
