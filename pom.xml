@@ -16,6 +16,11 @@
 		<jax-rs.version>2.1</jax-rs.version>
 		<slf4j-logger.version>1.7.25</slf4j-logger.version>
 		<jackson.version>1.9.13</jackson.version>
+		<mysql.version>6.0.6</mysql.version>
+		<javax.ejb.version>3.2</javax.ejb.version>
+		<cdi.version>2.0</cdi.version>
+		<hibernate.em.version>5.1.12.Final</hibernate.em.version>
+		<resteasy.jaxrs.version>2.3.10.Final</resteasy.jaxrs.version>
 	</properties>
 
 	<dependencies>
@@ -40,7 +45,7 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>2.3.10.Final</version>
+			<version>${resteasy.jaxrs.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.jboss.logging</groupId>
@@ -52,26 +57,26 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.1.12.Final</version>
+			<version>${hibernate.em.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
-			<version>2.0</version>
+			<version>${cdi.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.ejb</groupId>
 			<artifactId>javax.ejb-api</artifactId>
-			<version>3.2</version>
+			<version>${javax.ejb.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>6.0.6</version>
+			<version>${mysql.version}</version>
 		</dependency>
 
 		<!-- Test-Scope -->
@@ -82,4 +87,18 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<finalName>dr-solutions</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerVersion>1.8</compilerVersion>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

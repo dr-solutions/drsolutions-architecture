@@ -3,13 +3,15 @@ package at.drsolutions.ws.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-public class BackendServiceApp extends Application {
+@ApplicationPath("/*")
+public class BackendServiceApplication extends Application {
 
 	private Set<Object> singletons = new HashSet<Object>();
 
-	public BackendServiceApp() {
+	public BackendServiceApplication() {
 		singletons.add(new BackendServiceImpl());
 	}
 
