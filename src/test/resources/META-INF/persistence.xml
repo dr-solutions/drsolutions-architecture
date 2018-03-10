@@ -8,7 +8,7 @@
 		<class>at.drsolutions.persistence.Termin</class>
 
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/drsolutions" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/drsolutions?useTimezone=true&amp;serverTimezone=CET" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
