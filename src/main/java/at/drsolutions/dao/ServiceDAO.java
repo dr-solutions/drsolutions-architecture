@@ -3,20 +3,22 @@ package at.drsolutions.dao;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class ServiceDAO {
 
-	@PersistenceContext(unitName = "drsolutions")
-	private EntityManager em;
+	private static EntityManager em;
+
+	static {
+		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("drsolutions");
+		em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+	};
 
 	@Produces
 	@RequestScoped
 	public EntityManager getEntityManager() {
 		return em;
-	}
-
-	public void setEntityManager(EntityManager em) {
-		this.em = em;
 	}
 }
