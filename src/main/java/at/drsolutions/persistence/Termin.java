@@ -20,9 +20,9 @@ public class Termin implements Serializable {
 	public static final String FIND_ALL = "findAllTermine";
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "termin_id")
-	private int id;
+	private Integer id;
 
 	@Column(name = "bezeichnung")
 	private String bezeichnung;
@@ -34,7 +34,7 @@ public class Termin implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date zeitpunt;
 
-	public Termin(int id, String bezeichnung, String beteiligtePersonen, Date zeitpunt) {
+	public Termin(Integer id, String bezeichnung, String beteiligtePersonen, Date zeitpunt) {
 		super();
 		this.id = id;
 		this.bezeichnung = bezeichnung;
@@ -46,11 +46,11 @@ public class Termin implements Serializable {
 		super();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

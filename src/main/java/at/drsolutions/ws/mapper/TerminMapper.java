@@ -6,38 +6,67 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 
-import at.drsolutions.dto.TerminOutput;
+import at.drsolutions.dto.TerminDto;
 import at.drsolutions.persistence.Termin;
 
 public class TerminMapper {
 
-	public static Termin mapToEntity(TerminOutput output) {
+	public static Termin mapToEntity(TerminDto output) {
 		return new Termin(output.getId(), output.getBezeichnung(), output.getBeteiligtePersonen(),
 				output.getZeitpunt());
 	}
 
-	public static TerminOutput mapToDto(Termin entity) {
-		return new TerminOutput(entity.getId(), entity.getBezeichnung(), entity.getBeteiligtePersonen(),
+	public static TerminDto mapToDto(Termin entity) {
+		return new TerminDto(entity.getId(), entity.getBezeichnung(), entity.getBeteiligtePersonen(),
 				entity.getZeitpunt());
 	}
 
-	public static List<Termin> mapToEntityList(List<TerminOutput> outputs) {
+	public static List<Termin> mapToEntityList(List<TerminDto> outputs) {
 		return outputs != null ? outputs.stream().map(output -> mapToEntity(output)).collect(Collectors.toList())
 				: new ArrayList<>();
 	}
 
-	public static List<TerminOutput> mapToDtoList(List<Termin> termine) {
+	public static List<TerminDto> mapToDtoList(List<Termin> termine) {
 		return termine != null ? termine.stream().map(termin -> mapToDto(termin)).collect(Collectors.toList())
 				: new ArrayList<>();
 	}
 
-	public String mapToOutputString(List<TerminOutput> termine) {
+	public String mapToOutputString(List<TerminDto> termine) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.writeValueAsString(termine);
 		} catch (IOException e) {
 			return "";
+		}
+	}
+
+	public String mapToOutputString(TerminDto termine) {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writeValueAsString(termine);
+		} catch (IOException e) {
+			return "";
+		}
+	}
+
+	public TerminDto mapToInputDto(String json) {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.readValue(json, TerminDto.class);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public List<TerminDto> mapToInputDtoList(String json) {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.readValue(json, new TypeReference<List<TerminDto>>() {
+			});
+		} catch (IOException e) {
+			return new ArrayList<>();
 		}
 	}
 }

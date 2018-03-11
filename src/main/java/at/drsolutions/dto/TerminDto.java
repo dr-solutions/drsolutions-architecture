@@ -3,15 +3,21 @@ package at.drsolutions.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TerminOutput implements Serializable {
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class TerminDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private Integer id;
 	private String bezeichnung;
 	private String beteiligtePersonen;
 	private Date zeitpunt;
 
-	public TerminOutput(int id, String bezeichnung, String beteiligtePersonen, Date zeitpunt) {
+	public TerminDto() {
+	}
+
+	public TerminDto(Integer id, String bezeichnung, String beteiligtePersonen, Date zeitpunt) {
 		super();
 		this.id = id;
 		this.bezeichnung = bezeichnung;
@@ -19,11 +25,11 @@ public class TerminOutput implements Serializable {
 		this.zeitpunt = zeitpunt;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

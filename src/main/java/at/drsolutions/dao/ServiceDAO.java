@@ -21,4 +21,9 @@ public class ServiceDAO {
 	public EntityManager getEntityManager() {
 		return em;
 	}
+
+	@SuppressWarnings("static-access")
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
+	}
 }
