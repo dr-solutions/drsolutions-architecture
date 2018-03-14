@@ -56,4 +56,10 @@ public class TerminDto implements Serializable {
 	public void setZeitpunt(Date zeitpunt) {
 		this.zeitpunt = zeitpunt;
 	}
+
+	@Override
+	public String toString() {
+		return "TerminDto [id=" + id + ", bezeichnung=" + bezeichnung + ", beteiligtePersonen=" + beteiligtePersonen
+				+ ", zeitpunt=" + zeitpunt + "]";
+	}
 }

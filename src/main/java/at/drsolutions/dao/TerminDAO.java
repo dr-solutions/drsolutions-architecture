@@ -2,6 +2,8 @@ package at.drsolutions.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import at.drsolutions.persistence.Termin;
 
 public class TerminDAO extends ServiceDAO {
@@ -11,6 +13,7 @@ public class TerminDAO extends ServiceDAO {
 		return getEntityManager().createNamedQuery(Termin.FIND_ALL, Termin.class).getResultList();
 	}
 
+	@Transactional
 	public List<Termin> saveOrUpdate(Termin termin) {
 		if (termin != null) {
 			// Save new Temrin (save)
@@ -26,6 +29,7 @@ public class TerminDAO extends ServiceDAO {
 		return getAllTermine();
 	}
 
+	@Transactional
 	public List<Termin> saveOrUpdateList(List<Termin> termine) {
 		if (termine != null && !termine.isEmpty()) {
 			for (Termin termin : termine) {

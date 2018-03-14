@@ -10,10 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name = "Termin")
 @NamedQueries({ @NamedQuery(name = Termin.FIND_ALL, query = "select t from Termin t") })
 public class Termin implements Serializable {
 	private static final long serialVersionUID = 1L;

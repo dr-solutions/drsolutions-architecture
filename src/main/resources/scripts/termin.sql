@@ -8,5 +8,5 @@ create table drsolutions.TERMIN (
     PRIMARY KEY (termin_id)
 );
 
-Insert into drsolutions.TERMIN (bezeichnung, zeitpunkt, beteiligte_person) values ('Codingsession','2018-03-07','Jakob, René');
-Insert into drsolutions.TERMIN (bezeichnung, zeitpunkt, beteiligte_person) values ('Frühstücken','2018-03-11','Jakob, Lisa');
+Insert into drsolutions.TERMIN (bezeichnung, zeitpunkt, beteiligte_person) values ('Codingsession','2018-03-07','Jakob, RenÃ©');
+Insert into drsolutions.TERMIN (bezeichnung, zeitpunkt, beteiligte_person) values ('FrÃ¼hstÃ¼cken','2018-03-11','Jakob, Lisa');

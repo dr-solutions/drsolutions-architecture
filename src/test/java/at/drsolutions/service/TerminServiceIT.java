@@ -25,6 +25,7 @@ public class TerminServiceIT extends IntegrationTest<TerminService> {
 	@Test
 	public void testGetAllTermine() {
 		List<TerminDto> termine = testedObject.getAllTermine();
+		termine.stream().forEach(System.out::println);
 		Assert.assertNotNull(termine);
 	}
 

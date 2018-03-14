@@ -12,7 +12,7 @@ public abstract class IntegrationTest<T> {
 	public T testedObject;
 
 	static {
-		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("drsolutions_test");
+		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("drsolutions");
 		em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 	};

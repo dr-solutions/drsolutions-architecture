@@ -1,6 +1,6 @@
 package at.drsolutions.dao;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,7 +17,7 @@ public class ServiceDAO {
 	};
 
 	@Produces
-	@RequestScoped
+	@ApplicationScoped
 	public EntityManager getEntityManager() {
 		return em;
 	}
