@@ -14,7 +14,9 @@ public abstract class IntegrationTest<T> {
 	static {
 		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("drsolutions");
 		em = emfactory.createEntityManager();
-		em.getTransaction().begin();
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
+		}
 	};
 
 	public abstract T newInstance();

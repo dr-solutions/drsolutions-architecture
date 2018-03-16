@@ -7,7 +7,6 @@ import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
-import at.drsolutions.dao.TerminDAO;
 import at.drsolutions.dto.TerminDto;
 import at.drsolutions.util.IntegrationTest;
 import at.drsolutions.ws.mapper.TerminMapper;
@@ -17,8 +16,8 @@ public class TerminServiceIT extends IntegrationTest<TerminService> {
 	@Override
 	public TerminService newInstance() {
 		TerminService service = new TerminService();
-		service.dao = new TerminDAO();
-		service.dao.setEntityManager(getEntityManager());
+		service = new TerminService();
+		service.em = getEntityManager();
 		return service;
 	}
 

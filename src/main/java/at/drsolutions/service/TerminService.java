@@ -1,33 +1,66 @@
 package at.drsolutions.service;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 
-import at.drsolutions.dao.TerminDAO;
 import at.drsolutions.dto.TerminDto;
+import at.drsolutions.persistence.Termin;
 import at.drsolutions.service.local.TerminServiceLocal;
 import at.drsolutions.ws.mapper.TerminMapper;
 
-@Stateless
-@Local(TerminServiceLocal.class)
-public class TerminService implements TerminServiceLocal {
+@Named("terminService")
+public class TerminService implements Serializable, TerminServiceLocal {
+	private static final long serialVersionUID = 1L;
 
-	TerminDAO dao = new TerminDAO();
+	EntityManager em;
 
-	@Override
-	public List<TerminDto> getAllTermine() {
-		return TerminMapper.mapToDtoList(dao.getAllTermine());
+	public TerminService() {
+		em = Persistence.createEntityManagerFactory("drsolutions").createEntityManager();
+		em.getTransaction().begin();
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public List<TerminDto> getAllTermine() {
+		return TerminMapper.mapToDtoList(em.createNamedQuery(Termin.FIND_ALL, Termin.class).getResultList());
+	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public List<TerminDto> saveOrUpdate(TerminDto termin) {
-		return TerminMapper.mapToDtoList(dao.saveOrUpdate(TerminMapper.mapToEntity(termin)));
+		if (termin != null) {
+			Termin entity = TerminMapper.mapToEntity(termin);
+			// Save new Temrin (save)
+			if (entity.getId() == null) {
+				em.persist(entity);
+			}
+			// Save existing Temrin (update)
+			else {
+				em.merge(entity);
+			}
+			em.flush();
+			em.getTransaction().commit();
+			// Transaction beginnen, wenn nicht schon passiert
+			if (!em.getTransaction().isActive()) {
+				em.getTransaction().begin();
+			}
+		}
+		return getAllTermine();
 	}
 
 	@Override
 	public List<TerminDto> saveOrUpdate(List<TerminDto> termin) {
-		return TerminMapper.mapToDtoList(dao.saveOrUpdateList(TerminMapper.mapToEntityList(termin)));
+		if (termin != null && !termin.isEmpty()) {
+			for (TerminDto dto : termin) {
+				saveOrUpdate(dto);
+			}
+		}
+		return getAllTermine();
 	}
 }
