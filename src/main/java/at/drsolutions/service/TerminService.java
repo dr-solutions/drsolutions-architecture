@@ -39,7 +39,7 @@ public class TerminService implements Serializable, TerminServiceLocal {
 
 			// Test fuer Exceptionhandling
 			if (termin.getBezeichnung() != null && termin.getBezeichnung().toLowerCase().contains("i bims")) {
-				throw new TerminActionExcpetion("'I bims' darf nicht in der Berzeichnung vorkommen!");
+				throw new TerminActionExcpetion("'I bims' darf nicht in der Bezeichnung vorkommen!");
 			}
 
 			Termin entity = TerminMapper.mapToEntity(termin);
