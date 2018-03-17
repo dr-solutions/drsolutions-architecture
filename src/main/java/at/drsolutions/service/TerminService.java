@@ -46,10 +46,7 @@ public class TerminService implements Serializable, TerminServiceLocal {
 			}
 			em.flush();
 			em.getTransaction().commit();
-			// Transaction beginnen, wenn nicht schon passiert
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
+			beginTransactionIfNotActive();
 		}
 		return getAllTermine();
 	}
@@ -62,5 +59,25 @@ public class TerminService implements Serializable, TerminServiceLocal {
 			}
 		}
 		return getAllTermine();
+	}
+
+	@Override
+	public List<TerminDto> remove(Integer id) {
+		if (id != null) {
+			Termin termin = em.find(Termin.class, id);
+			if (termin != null) {
+				em.remove(termin);
+				em.flush();
+				em.getTransaction().commit();
+				beginTransactionIfNotActive();
+			}
+		}
+		return getAllTermine();
+	}
+
+	private void beginTransactionIfNotActive() {
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
+		}
 	}
 }

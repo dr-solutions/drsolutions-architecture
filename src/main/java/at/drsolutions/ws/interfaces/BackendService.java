@@ -13,4 +13,6 @@ public interface BackendService {
 	public Response saveOrUpdateTermin(TerminDto termin);
 
 	public Response saveOrUpdateTerminList(String json);
+
+	public Response deleteTermin(Integer id);
 }

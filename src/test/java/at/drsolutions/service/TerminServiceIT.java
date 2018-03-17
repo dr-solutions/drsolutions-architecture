@@ -3,6 +3,7 @@ package at.drsolutions.service;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -52,5 +53,16 @@ public class TerminServiceIT extends IntegrationTest<TerminService> {
 		termine = testedObject.saveOrUpdate(termin);
 		Assert.assertNotNull(termine);
 		Assert.assertEquals(sizeBefore, termine.size());
+	}
+
+	@Test
+	public void testRemove() {
+		List<TerminDto> termine = testedObject.getAllTermine();
+		Assert.assertNotNull(termine);
+		TerminDto toRemove = termine.get(0);
+		Integer idToRemove = toRemove.getId();
+		termine = testedObject.remove(idToRemove);
+		Assert.assertTrue(
+				termine.stream().filter(t -> t.getId() == idToRemove).collect(Collectors.toList()).size() == 0);
 	}
 }

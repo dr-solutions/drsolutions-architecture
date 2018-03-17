@@ -83,4 +83,16 @@ public class BackendServiceImpl implements BackendService {
 		String toReturn = terminMapper.mapToOutputString(termine);
 		return ResponseMapper.erzeugeResponseOk(toReturn);
 	}
+
+	@Override
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/deleteTermin")
+	public Response deleteTermin(Integer id) {
+		TerminServiceLocal terminService = new TerminService();
+		List<TerminDto> termine = terminService.remove(id);
+		String toReturn = terminMapper.mapToOutputString(termine);
+		return ResponseMapper.erzeugeResponseOk(toReturn);
+	}
 }
