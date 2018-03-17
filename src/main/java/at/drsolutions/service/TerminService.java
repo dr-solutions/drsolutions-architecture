@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import at.drsolutions.dto.TerminDto;
+import at.drsolutions.exception.TerminActionExcpetion;
 import at.drsolutions.persistence.Termin;
 import at.drsolutions.service.local.TerminServiceLocal;
 import at.drsolutions.ws.mapper.TerminMapper;
@@ -35,6 +36,12 @@ public class TerminService implements Serializable, TerminServiceLocal {
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public List<TerminDto> saveOrUpdate(TerminDto termin) {
 		if (termin != null) {
+
+			// Test fuer Exceptionhandling
+			if (termin.getBezeichnung() != null && termin.getBezeichnung().toLowerCase().contains("i bims")) {
+				throw new TerminActionExcpetion("'I bims' darf nicht in der Berzeichnung vorkommen!");
+			}
+
 			Termin entity = TerminMapper.mapToEntity(termin);
 			// Save new Temrin (save)
 			if (entity.getId() == null) {

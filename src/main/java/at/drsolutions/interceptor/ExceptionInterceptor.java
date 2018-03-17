@@ -8,6 +8,7 @@ import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import at.drsolutions.exception.TerminActionExcpetion;
 import at.drsolutions.ws.mapper.ResponseMapper;
 
 @Provider
@@ -16,10 +17,15 @@ public class ExceptionInterceptor implements ExceptionMapper<Throwable> {
 
 	@Override
 	public Response toResponse(Throwable exception) {
-		String message = "Unerwarteter Fehler!";
-		LOGGER.error(message, exception);
-		String responseMessage = extractAndAppendExceptioninfo(message, exception);
-		return ResponseMapper.erzeugeResponseFehler(responseMessage, Status.INTERNAL_SERVER_ERROR);
+
+		if (exception instanceof TerminActionExcpetion) {
+			return ResponseMapper.erzeugeResponseFehler(exception.getMessage(), Status.INTERNAL_SERVER_ERROR);
+		} else {
+			String message = "Unerwarteter Fehler!";
+			LOGGER.error(message, exception);
+			String responseMessage = extractAndAppendExceptioninfo(message, exception);
+			return ResponseMapper.erzeugeResponseFehler(responseMessage, Status.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	private String extractAndAppendExceptioninfo(String message, Throwable exception) {
