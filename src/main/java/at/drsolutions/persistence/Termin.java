@@ -43,7 +43,7 @@ public class Termin implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date zeitpunkt;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "Person_Termin", //
 			joinColumns = { @JoinColumn(name = "termin_id") }, //
 			inverseJoinColumns = { @JoinColumn(name = "person_id") })

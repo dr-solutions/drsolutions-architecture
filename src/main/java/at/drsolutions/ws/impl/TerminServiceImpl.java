@@ -40,6 +40,7 @@ public class TerminServiceImpl implements TerminService {
 	@Path("/saveOrUpdateTermin")
 	public Response saveOrUpdateTermin(TerminDto termin) {
 		TerminBeanLocal terminService = new TerminBean();
+		termin.setOrt("Musterort");
 		List<TerminDto> termine = terminService.saveOrUpdate(termin);
 		String toReturn = terminMapper.mapToOutputString(termine);
 		return ResponseMapper.erzeugeResponseOk(toReturn);

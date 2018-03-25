@@ -18,6 +18,11 @@ public class PersonSelectDto implements Serializable {
 		this.label = label;
 	}
 
+	public PersonSelectDto(Integer value) {
+		super();
+		this.value = value;
+	}
+
 	public Integer getValue() {
 		return value;
 	}
