@@ -13,14 +13,14 @@ import at.drsolutions.persistence.Termin;
 
 public class TerminMapper {
 
-	public static Termin mapToEntity(TerminDto output) {
-		return new Termin(output.getId(), output.getBezeichnung(), output.getBeteiligtePersonen(),
-				output.getZeitpunt());
+	public static Termin mapToEntity(TerminDto dto) {
+		return new Termin(dto.getId(), dto.getBezeichnung(), dto.getOrt(), dto.getZeitpunkt(),
+				PersonMapper.mapToEntityList(dto.getBeteiligtePersonen()));
 	}
 
 	public static TerminDto mapToDto(Termin entity) {
-		return new TerminDto(entity.getId(), entity.getBezeichnung(), entity.getBeteiligtePersonen(),
-				entity.getZeitpunt());
+		return new TerminDto(entity.getId(), entity.getBezeichnung(), entity.getOrt(), entity.getZeitpunkt(),
+				PersonMapper.mapToSelectDtoList(entity.getPersonen()));
 	}
 
 	public static List<Termin> mapToEntityList(List<TerminDto> outputs) {

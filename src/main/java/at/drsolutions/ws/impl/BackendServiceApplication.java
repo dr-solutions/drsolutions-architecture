@@ -12,7 +12,7 @@ public class BackendServiceApplication extends Application {
 	private Set<Object> singletons = new HashSet<Object>();
 
 	public BackendServiceApplication() {
-		singletons.add(new BackendServiceImpl());
+		singletons.add(new TerminServiceImpl());
 	}
 
 	@Override

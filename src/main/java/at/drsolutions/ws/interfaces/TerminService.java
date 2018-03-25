@@ -4,9 +4,7 @@ import javax.ws.rs.core.Response;
 
 import at.drsolutions.dto.TerminDto;
 
-public interface BackendService {
-
-	public Response generateRandomIntegerText(int max);
+public interface TerminService {
 
 	public Response getAllTermine();
 

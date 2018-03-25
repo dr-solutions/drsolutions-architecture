@@ -4,7 +4,7 @@ import java.util.List;
 
 import at.drsolutions.dto.TerminDto;
 
-public interface TerminServiceLocal {
+public interface TerminBeanLocal {
 	List<TerminDto> getAllTermine();
 
 	List<TerminDto> saveOrUpdate(TerminDto termin);

@@ -2,6 +2,7 @@ package at.drsolutions.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,18 +12,22 @@ public class TerminDto implements Serializable {
 
 	private Integer id;
 	private String bezeichnung;
-	private String beteiligtePersonen;
-	private Date zeitpunt;
+	private String ort;
+	private Date zeitpunkt;
+	private List<PersonSelectDto> beteiligtePersonen;
 
 	public TerminDto() {
+		super();
 	}
 
-	public TerminDto(Integer id, String bezeichnung, String beteiligtePersonen, Date zeitpunt) {
+	public TerminDto(Integer id, String bezeichnung, String ort, Date zeitpunkt,
+			List<PersonSelectDto> beteiligtePersonen) {
 		super();
 		this.id = id;
 		this.bezeichnung = bezeichnung;
+		this.ort = ort;
+		this.zeitpunkt = zeitpunkt;
 		this.beteiligtePersonen = beteiligtePersonen;
-		this.zeitpunt = zeitpunt;
 	}
 
 	public Integer getId() {
@@ -41,25 +46,33 @@ public class TerminDto implements Serializable {
 		this.bezeichnung = bezeichnung;
 	}
 
-	public String getBeteiligtePersonen() {
+	public String getOrt() {
+		return ort;
+	}
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+	public Date getZeitpunkt() {
+		return zeitpunkt;
+	}
+
+	public void setZeitpunkt(Date zeitpunkt) {
+		this.zeitpunkt = zeitpunkt;
+	}
+
+	public List<PersonSelectDto> getBeteiligtePersonen() {
 		return beteiligtePersonen;
 	}
 
-	public void setBeteiligtePersonen(String beteiligtePersonen) {
+	public void setBeteiligtePersonen(List<PersonSelectDto> beteiligtePersonen) {
 		this.beteiligtePersonen = beteiligtePersonen;
-	}
-
-	public Date getZeitpunt() {
-		return zeitpunt;
-	}
-
-	public void setZeitpunt(Date zeitpunt) {
-		this.zeitpunt = zeitpunt;
 	}
 
 	@Override
 	public String toString() {
-		return "TerminDto [id=" + id + ", bezeichnung=" + bezeichnung + ", beteiligtePersonen=" + beteiligtePersonen
-				+ ", zeitpunt=" + zeitpunt + "]";
+		return "TerminDto [id=" + id + ", bezeichnung=" + bezeichnung + ", ort=" + ort + ", zeitpunkt=" + zeitpunkt
+				+ ", beteiligtePersonen=" + beteiligtePersonen + "]";
 	}
 }

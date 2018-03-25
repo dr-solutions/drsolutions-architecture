@@ -8,6 +8,7 @@
 		<!-- <jta-data-source>java:jboss/datasources/MariaDBDS</jta-data-source>-->
 
 		<class>at.drsolutions.persistence.Termin</class>
+		<class>at.drsolutions.persistence.Person</class>
 		<exclude-unlisted-classes />
 
 		<properties>
