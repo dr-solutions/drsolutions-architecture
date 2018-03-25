@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.type.TypeReference;
 
 import at.drsolutions.dto.TerminDto;
@@ -38,6 +39,7 @@ public class TerminMapper {
 	public static String mapToOutputString(List<TerminDto> termine) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
+			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
 			return mapper.writeValueAsString(termine);
 		} catch (IOException e) {
 			return "";
@@ -47,6 +49,7 @@ public class TerminMapper {
 	public static String mapToOutputString(TerminDto termine) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
+			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
 			return mapper.writeValueAsString(termine);
 		} catch (IOException e) {
 			return "";
@@ -56,6 +59,7 @@ public class TerminMapper {
 	public static TerminDto mapToInputDto(String json) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
+			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
 			return mapper.readValue(json, TerminDto.class);
 		} catch (IOException e) {
 			return null;
@@ -65,6 +69,7 @@ public class TerminMapper {
 	public static List<TerminDto> mapToInputDtoList(String json) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
+			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
 			return mapper.readValue(json, new TypeReference<List<TerminDto>>() {
 			});
 		} catch (IOException e) {

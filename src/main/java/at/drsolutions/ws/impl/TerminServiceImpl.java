@@ -23,7 +23,7 @@ public class TerminServiceImpl implements TerminService {
 
 	@Override
 	@GET
-	@Produces({ "application/json" })
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getAllTermine")
 	public Response getAllTermine() {
 		TerminBeanLocal terminService = new TerminBean();

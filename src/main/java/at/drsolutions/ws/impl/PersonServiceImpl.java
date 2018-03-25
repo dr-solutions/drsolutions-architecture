@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import at.drsolutions.dto.PersonSelectDto;
@@ -20,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	@GET
-	@Produces({ "application/json" })
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getAllPersonenSelect")
 	public Response getAllPersonenSelect() {
 		PersonBeanLocal personBean = new PersonBean();
