@@ -33,7 +33,7 @@ public class TerminBean implements Serializable, TerminBeanLocal {
 	@Override
 	public List<TerminDto> saveOrUpdate(TerminDto termin) {
 		if (termin != null) {
-			Termin entity = TerminMapper.mapToEntity(termin);
+			Termin entity = TerminMapper.mapToEntity(termin, em);
 			// Save new Temrin (save)
 			if (entity.getId() == null) {
 				em.persist(entity);

@@ -6,17 +6,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
 import at.drsolutions.dto.PersonSelectDto;
 import at.drsolutions.persistence.Person;
 
 public class PersonMapper {
 
-	public static Person mapToEntity(PersonSelectDto dto) {
-		return new Person();
+	public static Person mapToEntity(PersonSelectDto dto, EntityManager em) {
+		return em.find(Person.class, dto.getValue());
 	}
 
-	public static Set<Person> mapToEntityList(List<PersonSelectDto> personen) {
-		return personen != null ? personen.stream().map(person -> mapToEntity(person)).collect(Collectors.toSet())
+	public static Set<Person> mapToEntityList(List<PersonSelectDto> personen, EntityManager em) {
+		return personen != null ? personen.stream().map(person -> mapToEntity(person, em)).collect(Collectors.toSet())
 				: new HashSet<>();
 	}
 

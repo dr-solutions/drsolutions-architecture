@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -13,9 +15,9 @@ import at.drsolutions.persistence.Termin;
 
 public class TerminMapper {
 
-	public static Termin mapToEntity(TerminDto dto) {
+	public static Termin mapToEntity(TerminDto dto, EntityManager em) {
 		return new Termin(dto.getId(), dto.getBezeichnung(), dto.getOrt(), dto.getZeitpunkt(),
-				PersonMapper.mapToEntityList(dto.getBeteiligtePersonen()));
+				PersonMapper.mapToEntityList(dto.getBeteiligtePersonen(), em));
 	}
 
 	public static TerminDto mapToDto(Termin entity) {
@@ -23,8 +25,8 @@ public class TerminMapper {
 				PersonMapper.mapToSelectDtoList(entity.getPersonen()));
 	}
 
-	public static List<Termin> mapToEntityList(List<TerminDto> outputs) {
-		return outputs != null ? outputs.stream().map(output -> mapToEntity(output)).collect(Collectors.toList())
+	public static List<Termin> mapToEntityList(List<TerminDto> outputs, EntityManager em) {
+		return outputs != null ? outputs.stream().map(output -> mapToEntity(output, em)).collect(Collectors.toList())
 				: new ArrayList<>();
 	}
 
