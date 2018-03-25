@@ -20,7 +20,6 @@ import at.drsolutions.ws.mapper.TerminMapper;
 //http://localhost:8080/dr-solutions/rest/terminService/[methodname]
 @Path("/terminService")
 public class TerminServiceImpl implements TerminService {
-	private TerminMapper terminMapper = new TerminMapper();
 
 	@Override
 	@GET
@@ -29,7 +28,7 @@ public class TerminServiceImpl implements TerminService {
 	public Response getAllTermine() {
 		TerminBeanLocal terminService = new TerminBean();
 		List<TerminDto> termine = terminService.getAllTermine();
-		String toReturn = terminMapper.mapToOutputString(termine);
+		String toReturn = TerminMapper.mapToOutputString(termine);
 		return ResponseMapper.erzeugeResponseOk(toReturn);
 	}
 
@@ -42,7 +41,7 @@ public class TerminServiceImpl implements TerminService {
 		TerminBeanLocal terminService = new TerminBean();
 		termin.setOrt("Musterort");
 		List<TerminDto> termine = terminService.saveOrUpdate(termin);
-		String toReturn = terminMapper.mapToOutputString(termine);
+		String toReturn = TerminMapper.mapToOutputString(termine);
 		return ResponseMapper.erzeugeResponseOk(toReturn);
 	}
 
@@ -53,9 +52,9 @@ public class TerminServiceImpl implements TerminService {
 	@Path("/saveOrUpdateTerminList")
 	public Response saveOrUpdateTerminList(String json) {
 		TerminBeanLocal terminService = new TerminBean();
-		List<TerminDto> termineToSave = terminMapper.mapToInputDtoList(json);
+		List<TerminDto> termineToSave = TerminMapper.mapToInputDtoList(json);
 		List<TerminDto> termine = terminService.saveOrUpdate(termineToSave);
-		String toReturn = terminMapper.mapToOutputString(termine);
+		String toReturn = TerminMapper.mapToOutputString(termine);
 		return ResponseMapper.erzeugeResponseOk(toReturn);
 	}
 
@@ -67,7 +66,7 @@ public class TerminServiceImpl implements TerminService {
 	public Response deleteTermin(Integer id) {
 		TerminBeanLocal terminService = new TerminBean();
 		List<TerminDto> termine = terminService.remove(id);
-		String toReturn = terminMapper.mapToOutputString(termine);
+		String toReturn = TerminMapper.mapToOutputString(termine);
 		return ResponseMapper.erzeugeResponseOk(toReturn);
 	}
 }

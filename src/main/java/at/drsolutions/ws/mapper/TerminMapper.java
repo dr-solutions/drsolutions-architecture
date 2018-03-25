@@ -35,7 +35,7 @@ public class TerminMapper {
 				: new ArrayList<>();
 	}
 
-	public String mapToOutputString(List<TerminDto> termine) {
+	public static String mapToOutputString(List<TerminDto> termine) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.writeValueAsString(termine);
@@ -44,7 +44,7 @@ public class TerminMapper {
 		}
 	}
 
-	public String mapToOutputString(TerminDto termine) {
+	public static String mapToOutputString(TerminDto termine) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.writeValueAsString(termine);
@@ -53,7 +53,7 @@ public class TerminMapper {
 		}
 	}
 
-	public TerminDto mapToInputDto(String json) {
+	public static TerminDto mapToInputDto(String json) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.readValue(json, TerminDto.class);
@@ -62,7 +62,7 @@ public class TerminMapper {
 		}
 	}
 
-	public List<TerminDto> mapToInputDtoList(String json) {
+	public static List<TerminDto> mapToInputDtoList(String json) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.readValue(json, new TypeReference<List<TerminDto>>() {

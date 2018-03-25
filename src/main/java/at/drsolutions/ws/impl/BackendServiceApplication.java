@@ -13,6 +13,7 @@ public class BackendServiceApplication extends Application {
 
 	public BackendServiceApplication() {
 		singletons.add(new TerminServiceImpl());
+		singletons.add(new PersonServiceImpl());
 	}
 
 	@Override

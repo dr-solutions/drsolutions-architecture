@@ -1,28 +1,22 @@
 package at.drsolutions.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 import at.drsolutions.dto.TerminDto;
 import at.drsolutions.persistence.Termin;
 import at.drsolutions.service.local.TerminBeanLocal;
 import at.drsolutions.ws.mapper.TerminMapper;
 
-public class TerminBean implements Serializable, TerminBeanLocal {
+public class TerminBean extends AbstractBean implements TerminBeanLocal {
 	private static final long serialVersionUID = 1L;
 
-	EntityManager em;
-
 	public TerminBean() {
-		em = Persistence.createEntityManagerFactory("drsolutions").createEntityManager();
-		em.getTransaction().begin();
 	}
 
 	public TerminBean(EntityManager em) {
-		this.em = em;
+		super(em);
 	}
 
 	@Override
