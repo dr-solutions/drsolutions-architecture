@@ -1,20 +1,24 @@
 package at.drsolutions.ws.mapper;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.type.TypeReference;
 
 import at.drsolutions.dto.TerminDto;
 import at.drsolutions.persistence.Termin;
 
 public class TerminMapper {
+
+	private static final String DATE_FORMAT_ISO_8601 = "yyyy-MM-dd'T'HH:mm";
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_ISO_8601, Locale.GERMANY);
 
 	public static Termin mapToEntity(TerminDto dto, EntityManager em) {
 		return new Termin(dto.getId(), dto.getBezeichnung(), dto.getOrt(), dto.getZeitpunkt(),
@@ -39,37 +43,17 @@ public class TerminMapper {
 	public static String mapToOutputString(List<TerminDto> termine) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
+			mapper.setDateFormat(dateFormat);
 			return mapper.writeValueAsString(termine);
 		} catch (IOException e) {
 			return "";
-		}
-	}
-
-	public static String mapToOutputString(TerminDto termine) {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
-			return mapper.writeValueAsString(termine);
-		} catch (IOException e) {
-			return "";
-		}
-	}
-
-	public static TerminDto mapToInputDto(String json) {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
-			return mapper.readValue(json, TerminDto.class);
-		} catch (IOException e) {
-			return null;
 		}
 	}
 
 	public static List<TerminDto> mapToInputDtoList(String json) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
+			mapper.setDateFormat(dateFormat);
 			return mapper.readValue(json, new TypeReference<List<TerminDto>>() {
 			});
 		} catch (IOException e) {
