@@ -17,7 +17,7 @@ import at.drsolutions.persistence.Termin;
 
 public class TerminMapper {
 
-	private static final String DATE_FORMAT_ISO_8601 = "yyyy-MM-dd'T'HH:mm";
+	private static final String DATE_FORMAT_ISO_8601 = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_ISO_8601, Locale.GERMANY);
 
 	public static Termin mapToEntity(TerminDto dto, EntityManager em) {

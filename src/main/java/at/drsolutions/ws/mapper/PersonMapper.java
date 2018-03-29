@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.type.TypeReference;
 
 import at.drsolutions.dto.PersonDto;
@@ -62,7 +61,6 @@ public class PersonMapper {
 	public static String mapToSelectedOutputString(List<PersonSelectDto> personen) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.disable(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS);
 			return mapper.writeValueAsString(personen);
 		} catch (IOException e) {
 			return "";
