@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,7 +42,10 @@ public class Person implements Serializable {
 	@Column(name = "telefon")
 	private String telefon;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "personen")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "Person_Termin", //
+			joinColumns = { @JoinColumn(name = "person_id") }, //
+			inverseJoinColumns = { @JoinColumn(name = "termin_id") })
 	private Set<Termin> termine = new HashSet<>();
 
 	public Person(Integer id, String vorname, String nachname, String mail, String telefon, Set<Termin> termine) {
